@@ -20,12 +20,14 @@ export function MainNav({
       >
         Home
       </Link>
-      <Link
-        to="/dashboard/config-books"
-        className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-      >
-        Livros
-      </Link>
+      {user?.isAdm && (
+        <Link
+          to="/dashboard/config-books"
+          className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+        >
+          Livros
+        </Link>
+      )}
       {user?.isAdm && (
         <Link
           to="/dashboard/config-users"

@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 export function useQueryUsers() {
   return useQuery({
     queryKey: ['users'],
-    queryFn: getUsers
+    queryFn: getUsers,
+    staleTime: Infinity
   });
 }

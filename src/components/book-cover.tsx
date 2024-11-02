@@ -26,7 +26,7 @@ export function BookCover({
   return (
     <div className={cn("space-y-3", className)} {...props}>
       <div className="overflow-hidden rounded-md">
-        <Link to={`/dashboard/book/${book.name}`}>
+        <Link to={`/dashboard/book/${book.id}`}>
           <img
             src={book.cover}
             alt={book.name}

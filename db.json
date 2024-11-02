@@ -62,7 +62,7 @@
       "name": "Rodrigo",
       "email": "rodrigo@email.com",
       "password": "12345678",
-      "isAdm": false
+      "isAdm": true
     }
   ]
 }
