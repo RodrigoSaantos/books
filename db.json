@@ -13,6 +13,13 @@
       "email": "admin@email.com",
       "password": "12345678",
       "isAdm": true
+    },
+    {
+      "id": 28000,
+      "name": "Rodrigo",
+      "email": "rodrigo@gmail.com",
+      "password": "123456",
+      "isAdm": false
     }
   ]
 }

@@ -9,6 +9,13 @@ export async function signIn({ email, password }: SignInBody) {
   const userExists = response.data.length > 0
   if (userExists) {
     if (response.data[0].password === password) {
+
+      localStorage.setItem('auth', JSON.stringify({
+        name: response.data[0].name,
+        email: response.data[0].email,
+        isAdm: response.data[0].isAdm,
+      }))
+
       return response.data[0]
     }
   }
