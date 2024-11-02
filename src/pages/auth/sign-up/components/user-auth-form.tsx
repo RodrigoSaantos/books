@@ -1,9 +1,11 @@
+import { signUp } from "@/api/sign-up"
 import { Button } from "@/components/button"
 import { Icons } from "@/components/icons"
 import { Input } from "@/components/input"
 import { Label } from "@/components/label"
 import { cn } from "@/lib/utils"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useMutation } from "@tanstack/react-query"
 import * as React from "react"
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
@@ -12,6 +14,7 @@ import * as z from "zod"
 type UserAuthFormProps = React.HTMLAttributes<HTMLDivElement>
 
 const signUpForm = z.object({
+  name: z.string().min(3, { message: 'O nome deve ter pelo menos 3 caracteres'}),
   email: z.string().email('E-mail inválido'),
   password: z.string().min(6, { message: 'A senha deve ter pelo menos 6 caracteres'})
 });
@@ -29,22 +32,16 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     resolver: zodResolver(signUpForm)
   })
 
-  async function handleSignUp(data: SignUpForm) {
+  const { mutateAsync: createAccount } = useMutation({
+    mutationFn: signUp,
+  })
+
+  async function handleSignUp({ name, email, password}: SignUpForm) {
     try {
-      const response: any = await new Promise((resolve, reject) => {
-        setTimeout(() => {  
-          return reject({ data, status: 200 })
-        }, 1000)
-
-        if (response.status === 200) {
-          alert('Conta criada com sucesso')
-          reset()
-          navigate('/sign-in')
-        }
-
-        throw new Error('Algo deu errado!')
-
-      })
+      await createAccount({ name, email, password })
+      alert('Conta criada com sucesso')
+      reset()
+      navigate('/sign-in')
     } catch (err) {
       if (err instanceof Error) {
         alert(err.message)
@@ -56,6 +53,22 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     <div className={cn("grid gap-6", className)} {...props}>
       <form onSubmit={handleSubmit(handleSignUp)}>
         <div className="grid gap-2">
+          <div className="grid gap-2">
+            <Label htmlFor="name">
+              Nome
+            </Label>
+            <Input
+              id="name"
+              placeholder="Seu nome"
+              type="text"
+              autoCapitalize="none"
+              autoComplete="name"
+              autoCorrect="off"
+              disabled={isSubmitting}
+              {...register('name')}
+            />
+            {errors.name && <p className="text-xs text-destructive">{errors.name.message}</p>}
+          </div>
           <div className="grid gap-2">
             <Label htmlFor="email">
               Email
