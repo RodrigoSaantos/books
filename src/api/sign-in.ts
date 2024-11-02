@@ -16,6 +16,8 @@ export async function signIn({ email, password }: SignInBody) {
         isAdm: response.data[0].isAdm,
       }))
 
+      
+
       return response.data[0]
     }
   }

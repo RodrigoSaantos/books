@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils"
 import { Link } from "react-router-dom";
 
-interface Book {
+export interface Book {
   name: string
   description: string
   cover: string;

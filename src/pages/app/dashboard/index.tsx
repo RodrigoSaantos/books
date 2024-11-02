@@ -1,20 +1,10 @@
 import { BookCover } from "@/components/book-cover";
 import { MainNav } from "./components/main-nav";
 import { UserNav } from "./components/user-nav";
-
-const data = [
-  {name: 'Irure commodo', description: 'In Lorem dolore duis laboris qui exercitation occaecat dolore ex consectetur. Esse velit', cover: "https://images.unsplash.com/photo-1615247001958-f4bc92fa6a4a?w=300&dpr=2&q=80"},
-  {name: 'Irure commodo', description: 'In Lorem dolore duis laboris qui exercitation occaecat dolore ex consectetur. Esse velit', cover: "https://images.unsplash.com/photo-1615247001958-f4bc92fa6a4a?w=300&dpr=2&q=80"},
-  {name: 'Irure commodo', description: 'In Lorem dolore duis laboris qui exercitation occaecat dolore ex consectetur. Esse velit', cover: "https://images.unsplash.com/photo-1615247001958-f4bc92fa6a4a?w=300&dpr=2&q=80"},
-  {name: 'Irure commodo', description: 'In Lorem dolore duis laboris qui exercitation occaecat dolore ex consectetur. Esse velit', cover: "https://images.unsplash.com/photo-1615247001958-f4bc92fa6a4a?w=300&dpr=2&q=80"},
-  {name: 'Irure commodo', description: 'In Lorem dolore duis laboris qui exercitation occaecat dolore ex consectetur. Esse velit', cover: "https://images.unsplash.com/photo-1615247001958-f4bc92fa6a4a?w=300&dpr=2&q=80"},
-  {name: 'Irure commodo', description: 'In Lorem dolore duis laboris qui exercitation occaecat dolore ex consectetur. Esse velit', cover: "https://images.unsplash.com/photo-1615247001958-f4bc92fa6a4a?w=300&dpr=2&q=80"},
-  {name: 'Irure commodo', description: 'In Lorem dolore duis laboris qui exercitation occaecat dolore ex consectetur. Esse velit', cover: "https://images.unsplash.com/photo-1615247001958-f4bc92fa6a4a?w=300&dpr=2&q=80"},
-  {name: 'Irure commodo', description: 'In Lorem dolore duis laboris qui exercitation occaecat dolore ex consectetur. Esse velit', cover: "https://images.unsplash.com/photo-1615247001958-f4bc92fa6a4a?w=300&dpr=2&q=80"},
-  {name: 'Irure commodo', description: 'In Lorem dolore duis laboris qui exercitation occaecat dolore ex consectetur. Esse velit', cover: "https://images.unsplash.com/photo-1615247001958-f4bc92fa6a4a?w=300&dpr=2&q=80"},
-]
+import { useQueryBooks } from "@/hooks/use-query-books";
 
 export function Dashboard() {
+  const { data } = useQueryBooks()
   return (
       <div className="flex flex-col md:flex">
         <div className="border-b">
@@ -30,7 +20,7 @@ export function Dashboard() {
             <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
           </div>
           <div className="grid gap-4 grid-cols-2 sm:grid-cols-4 md:grid-cols-6 max-w-5xl">
-            {data.map(book => (
+            {data && data.map(book => (
               <BookCover 
                 key={book.name}
                 book={book}

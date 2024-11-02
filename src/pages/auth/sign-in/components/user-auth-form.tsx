@@ -3,6 +3,7 @@ import { Button } from "@/components/button"
 import { Icons } from "@/components/icons"
 import { Input } from "@/components/input"
 import { Label } from "@/components/label"
+import { useAuth } from "@/hooks/auth"
 import { cn } from "@/lib/utils"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useMutation } from "@tanstack/react-query"
@@ -21,6 +22,7 @@ const signInForm = z.object({
 type SignInForm = z.infer<typeof signInForm>
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
+  const { setUserState } = useAuth()
   const navigate = useNavigate();
   const {
     register,
@@ -37,7 +39,8 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
 
   async function handleSignIn({ email, password}: SignInForm) {
     try {
-      await authenticate({ email, password })
+      const response = await authenticate({ email, password })
+      setUserState(response);
       alert('Login realizado com sucesso')
       reset()
       navigate('/dashboard')
