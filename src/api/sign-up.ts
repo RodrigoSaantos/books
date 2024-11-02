@@ -7,7 +7,7 @@ export interface SignUpBody {
 }
 export async function signUp({ name, email, password }: SignUpBody) {
   return await api.post(`/users`, {
-    id: Math.floor(Math.random() * (999999 - 999 + 1)) + 999,
+    id: String(Math.floor(Math.random() * (999999 - 999 + 1)) + 999),
     name,
     email,
     password,

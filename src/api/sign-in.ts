@@ -11,6 +11,7 @@ export async function signIn({ email, password }: SignInBody) {
     if (response.data[0].password === password) {
 
       localStorage.setItem('auth', JSON.stringify({
+        id: response.data[0].id,
         name: response.data[0].name,
         email: response.data[0].email,
         isAdm: response.data[0].isAdm,
